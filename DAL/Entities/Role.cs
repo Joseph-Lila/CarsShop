@@ -1,19 +1,23 @@
-﻿namespace DAL.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DAL.Entities
 {
 
     /* Данный класс олицетворяет роль пользователя.
     *  От роли зависят возможности пользователя.
     */
 
-    internal class Role : IEntity
+    public class Role : IEntity
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
+        [Key]
+        public string Title { get; set; } = null!;
 
-        public Role(string title, string description)
-        {
-            Title = title;
-            Description = description;
-        }
+        // --- Обычные поля
+
+        public string Description { get; set; } = null!;
+
+        // --- Коллекции
+
+        public List<Account> Accounts { get; set; } = new();
     }
 }

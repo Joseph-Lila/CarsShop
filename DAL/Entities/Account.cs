@@ -1,4 +1,7 @@
-﻿namespace DAL.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DAL.Entities
 {
 
     /* Данный класс олицетворяет аккаунт пользователя.
@@ -6,24 +9,28 @@
     *  Также используя поля "Страна" и "Город" можно получить географическую статистику продаж и выявить наиболее выгодные и провальные пункты.
     */
 
-    internal class Account : IEntity
+    public class Account : IEntity
     {
+        [Key]
         public int Id { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public string RoleTitle { get; set; }
-        public string FIO { get; set; }
-        public string Country { get; set; }
-        public string City { get; set; }
-        public Account(int id, string login, string password, string roleTitle, string fIO, string country, string city)
-        {
-            Id = id;
-            Login = login;
-            Password = password;
-            RoleTitle = roleTitle;
-            FIO = fIO;
-            Country = country;
-            City = city;
-        }
+
+        // --- Обычные поля
+
+        public string Login { get; set; } = null!;
+        public string Password { get; set; } = null!;
+        public string FIO { get; set; } = null!;
+        public string Country { get; set; } = null!;
+        public string City { get; set; } = null!;
+
+        // --- Внешние ключи и нав. свойства
+
+        public string RoleTitle { get; set; } = null!;   // внешний ключ
+        [ForeignKey("RoleTitle")]
+        public Role Role { get; set; } = null!;   // навигационное свойство
+
+        // --- Коллекции
+
+        public List<Order> ManagerOrders { get; set; } = new();
+        public List<Order> Orders { get; set; } = new();
     }
 }

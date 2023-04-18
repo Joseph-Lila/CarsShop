@@ -1,19 +1,23 @@
-﻿namespace DAL.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DAL.Entities
 {
 
     /* Данный класс олицетворяет статус.
     *  Статус определяет состояние заказа.
     */
 
-    internal class Status : IEntity
+    public class Status : IEntity
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
+        [Key]
+        public string Title { get; set; } = null!;
 
-        public Status(string title, string description)
-        {
-            Title = title;
-            Description = description;
-        }
+        // --- Обычные поля
+
+        public string Description { get; set; } = null!;
+
+        // --- Коллекции
+
+        public List<Order> Orders { get; set; } = new();
     }
 }

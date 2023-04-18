@@ -1,20 +1,26 @@
-﻿namespace DAL.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DAL.Entities
 {
 
     /* Данный класс олицетворяет доп машины. Это может быть цвет, колесо, фары и т.д.
     *  Считается, что данный элемент может быть выбран при заказе автомобиля. Перечень доступных допов зависит от модели выбранного авто.
     */
 
-    internal class Part : IEntity
+    public class Part : IEntity
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
+        [Key]
+        public string Name { get; set; } = null!;
+
+        // --- Обычные поля
+
+        public string Description { get; set; } = null!;
         public double Cost { get; set; }
-        public Part(string name, string description, double cost)
-        {
-            Name = name;
-            Description = description;
-            Cost = cost;
-        }
+
+        public string LinkToPicture { get; set; } = null!;
+
+        // --- Коллекции
+
+        public List<CarPart> CarParts { get; set; } = new();
     }
 }

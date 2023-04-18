@@ -1,6 +1,11 @@
 ﻿namespace DAL.Entities
 {
-    internal interface IEntity
+
+    /*
+     * Интерфейс - маркер. Те, кто его наследует, являются сущностями предметной области.
+     */
+
+    public interface IEntity
     {
     }
 }
